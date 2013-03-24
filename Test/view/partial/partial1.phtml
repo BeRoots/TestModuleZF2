@@ -1,0 +1,33 @@
+<body id="top">
+    <div id="col_center">
+        <div id="header">
+            <p>HEADER</p>
+         </div>
+        <div id="container_nav">
+
+<ul id="css3menu1" class="topmenu">
+	<li class="topfirst">
+            <a href="<?php echo $this->url('test'); ?>" style="height:40px;line-height:40px;">Index action</a>
+            <div id="nobugspacer"></div>
+        </li>
+	<li class="topmenu">
+            <a href="<?php echo $this->url('test', array('action' => 'client')); ?>" style="height:40px;line-height:40px;">client action</a>
+            <div id="nobugspacer"></div>
+        </li>
+	<li class="topmenu">
+            <a href="<?php echo $this->url('test', array('action' => 'help')); ?>" style="height:40px;line-height:40px;">help action</a>
+            <div id="nobugspacer"></div>
+        </li>
+	<li class="topmenu">
+            <a href="#" style="height:40px;line-height:40px;">Evenements</a>
+        </li>
+	<li class="toplast">
+            <a href="#" style="height:40px;line-height:40px;">Family's & co.</a>
+            <div id="nobugspacer"></div>
+        </li>
+</ul>
+        </div>
+        <div id="container_center">
+            <p id="titre_page"><?php echo $this->myviewhelper()->templateVars['partial']['pageTitle']; ?></p>
+            <div id="contenu">
+<!-- CONTENT -->

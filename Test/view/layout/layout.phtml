@@ -1,0 +1,171 @@
+<?php
+/*
+ * brtsLayout
+ *
+ * Fichier de layout HTML5 pour la partie <head> commune
+ * à touts les modules et le inLineScript
+ *
+ * @author      Deschamps Sébastien <beroots74@gmail.com>
+ * @copyright   Deschamps Sébastien, all rights reserved.
+ * @version     1.0
+ * @since       PHP 5.4
+ * @name        brtsLayout
+ * 
+ * @param string $lang
+ * @param string $charset
+ * 
+ * @param string $metaDescription
+ * @param string $metaTitle
+ * @param string $metaKeyword
+ * @param string $metaCategory
+ * @param string $metaRobots
+ * @param array  $metaRefresh 2 key: [0] => $time (int)
+ *                                   [1] => $url (string) 
+ * @param string $suffixClient
+ * 
+ * @param string $windowTitle
+ * @param string $pageTitle
+ * 
+ * @param object $brtsHelper view helper instance already set
+ */
+
+/*
+ * On definit les meta "HttpEquiv" et "Name" grace à l'aide de vue headMeta
+ */
+
+$this->headMeta()->setCharset($this->myviewhelper()->vars['charset'])
+                 ->appendHttpEquiv('Expires', '0')
+                 ->appendHttpEquiv('Pragma', 'no-cache')
+                 ->appendHttpEquiv('Content-Type', 'text/html; charset='.$this->myviewhelper()->vars['charset'].';')
+                 ->appendHttpEquiv('Content-Style-Type', 'text/css; charset='.$this->myviewhelper()->vars['charset'].';')
+                 ->appendHttpEquiv('Content-Script-Type', 'text/javascript; charset='.$this->myviewhelper()->vars['charset'].';')
+                 ->appendHttpEquiv('Content-Language', $this->myviewhelper()->vars['lang'])
+                 ->appendName('Author', 'Deschamps Sébastien')
+                 ->appendName('Identifier-url', 'http://'.$_SERVER['HTTP_HOST'].';')
+                 ->appendName('Description', $this->translate($this->myviewhelper()->templateVars['layout']['metaDescription']), array('lang' => $this->myviewhelper()->vars['lang']))
+                 ->appendName('Title', $this->translate($this->myviewhelper()->templateVars['layout']['metaTitle']), array('lang' => $this->myviewhelper()->vars['lang']))
+                 ->appendName('keywords', $this->translate($this->myviewhelper()->templateVars['layout']['metaKeywords']), array('lang' => $this->myviewhelper()->vars['lang']))
+                 ->appendName('Category', $this->translate($this->myviewhelper()->templateVars['layout']['metaCategory']), array('lang' => $this->myviewhelper()->vars['lang']));
+if($this->myviewhelper()->templateVars['asset']['metaRefresh'] !== null && is_array($this->myviewhelper()->templateVars['asset']['metaRefresh'])){
+    $this->headMeta()->appendHttpEquiv('Refresh', $this->myviewhelper()->templateVars['asset']['metaRefresh'][0].'; URL='.$this->myviewhelper()->templateVars['asset']['metaRefresh'][1]);
+}
+if($this->myviewhelper()->templateVars['asset']['metaRobots'] === true){
+    $this->headMeta()->appendName('Robots', 'index,follow,all')
+                     ->appendName('Revisit-After', '2 days');
+}
+else $this->headMeta()->appendName('Robots', 'noindex, nofollow');
+
+/*
+ * On definit la meta title grace à l'aide de vue headTitle
+ */
+$this->headTitle('„“„ '.$this->translate($this->myviewhelper()->templateVars['layout']['windowTitle']))->setSeparator(' :: ')
+                                                                                    ->setAutoEscape(false);
+$this->headTitle($this->translate($this->myviewhelper()->templateVars['partial']['pageTitle']));
+
+/*
+ * On recuperer les feuille de style CSS prédéfinient via le helper alternatstyleSheet
+ */
+//$array_template = $this->alternateStylesheet()->;
+
+/*
+ * On definit la meta shortcut icon ainsi que les feuille css
+ * grace à l'aide de vue headLink
+ */
+$this->headLink(array('rel' => 'shortcut icon', 'type' => 'image/x-icon', 'href' => $this->basePath().'/img/'.$this->myviewhelper()->vars['suffix'].'.ico'), 'PREPEND')
+                 ->appendStylesheet($this->myviewhelper()->templateVars['layout']['css_reset'], 'screen', false)
+                 ->appendStylesheet($this->myviewhelper()->templateVars['partial']['css_all'], 'screen', false)
+                 ->appendStylesheet($this->myviewhelper()->templateVars['partial']['css_ie'], 'screen', 'IE')
+                 ->appendStylesheet($this->myviewhelper()->templateVars['view']['css_all'], 'screen', false)
+                 ->appendStylesheet($this->myviewhelper()->templateVars['view']['css_ie'], 'screen', 'IE');
+//                 ->appendStylesheet('/css/' . APPLICATION_NAME . '_BASE_ie_inferieur_a_7.css', 'screen', 'lte IE 6');
+if(isset($this->myviewhelper()->templateVars['asset']['addCss']) && is_array($this->myviewhelper()->templateVars['asset']['addCss'])){
+    foreach($this->myviewhelper()->templateVars['asset']['addCss'] as $value){
+        $array_values = explode($value);
+        $this->headLink()->appendStylesheet($array_values[0], $array_values[1], $array_values[2]);
+    }
+}
+if(isset($this->myviewhelper()->templateVars['asset']['addMootools']) && is_array($this->myviewhelper()->templateVars['asset']['addMootools'])){
+    $this->headLink()->appendStylesheet($this->myviewhelper()->templateVars['asset']['addMootools']['css'], 'screen', false); 
+}
+if(isset($this->myviewhelper()->templateVars['asset']['addShadowbox']) && is_array($this->myviewhelper()->templateVars['asset']['addShadowbox'])){
+    $this->headLink()->appendStylesheet($this->myviewhelper()->templateVars['asset']['addShadowbox']['css1'], 'screen', false)
+                     ->appendStylesheet($this->myviewhelper()->templateVars['asset']['addShadowbox']['css2'], 'screen', 'lte IE 6');
+}
+
+/*
+ * On definit les scripts si definit
+ */
+if(isset($this->myviewhelper()->templateVars['asset']['addJsFile']) && is_array($this->myviewhelper()->templateVars['asset']['addJsFile'])){
+   foreach($this->myviewhelper()->templateVars['asset']['addJsFile'] as $key => $value){
+       if($key == 'prependfile'){
+           foreach($value as $script){
+               $this->headScript()->appendFile($script, 'text/javascript', array());
+           }
+       }
+       elseif($key == 'appendfile'){
+           foreach($value as $script){
+               $this->headScript()->appendFile($script, 'text/javascript', array());
+           }
+       }
+   }
+}
+if(isset($this->myviewhelper()->templateVars['asset']['addJsScript']) && is_array($this->myviewhelper()->templateVars['asset']['addJsScript'])){
+   foreach($this->myviewhelper()->templateVars['asset']['addJsScript'] as $value){
+       $this->headScript()->appendScript($value, 'text/javascript', array());
+   }
+}
+if(isset($this->myviewhelper()->templateVars['asset']['addVbscriptScript']) && is_array($this->myviewhelper()->templateVars['asset']['addVbscriptScript'])){
+   foreach($this->myviewhelper()->templateVars['asset']['addVbscriptScript'] as $value){
+       $this->headScript()->appendScript($value, 'VBScript', array());
+   }
+}
+
+
+/*
+ * On definit les asset si definit
+ */
+if(isset($this->myviewhelper()->templateVars['asset']['addShadowbox']) && is_array($this->myviewhelper()->templateVars['asset']['addShadowbox'])){
+    $this->headScript()->appendFile($this->myviewhelper()->templateVars['asset']['addShadowbox']['js1'], 'text/javascript', array())
+                       ->appendFile($this->myviewhelper()->templateVars['asset']['addShadowbox']['js2'], 'text/javascript', array());
+}
+if(isset($this->myviewhelper()->templateVars['asset']['addShadowbox']) && isset($this->myviewhelper()->templateVars['asset']['addMootools']) && isset($this->myviewhelper()->templateVars['asset']['addDomready']) && is_array($this->myviewhelper()->templateVars['asset']['addShadowbox']) && is_array($this->myviewhelper()->templateVars['asset']['addDomready']) && is_array($this->myviewhelper()->templateVars['asset']['addMootools'])){
+    $this->headScript()->prependFile($this->myviewhelper()->templateVars['asset']['addDomready']['mootools_shadowbox'], 'text/javascript', array());
+}
+if(isset($this->myviewhelper()->templateVars['asset']['addShadowbox']) && isset($this->myviewhelper()->templateVars['asset']['addMootools']) && isset($this->myviewhelper()->templateVars['asset']['addDomready']) && $this->myviewhelper()->templateVars['asset']['addShadowbox'] === false && $this->myviewhelper()->templateVars['asset']['addMootools'] !== false && is_array($this->myviewhelper()->templateVars['asset']['addDomready'])){
+    $this->headScript()->prependFile($this->myviewhelper()->templateVars['asset']['addDomready']['mootools'], 'text/javascript', array());
+}
+if(isset($this->myviewhelper()->templateVars['asset']['addMootools']) && is_array($this->myviewhelper()->templateVars['asset']['addMootools'])){
+    $this->headScript()->prependFile($this->myviewhelper()->templateVars['asset']['addMootools']['js2'], 'text/javascript', array())
+                       ->prependFile($this->myviewhelper()->templateVars['asset']['addMootools']['js1'], 'text/javascript', array());
+}
+
+/*
+ * On affiche le tout dans 'ordre et entre commentaire
+ */
+echo $this->doctype()."\n";
+?>
+<!-- HTML5 BY Deschamps Sebastien. all rights reserved -->
+<html lang="<?php echo $this->myviewhelper()->vars['lang']; ?>">
+<head>
+<?php
+echo "<!-- META -->\n";
+echo $this->headMeta()."\n";
+echo "<!-- /META -->\n\n<!-- TITLE -->\n";
+echo $this->headTitle()."\n";
+echo "<!-- /TITLE -->\n\n<!-- LINK -->\n";
+echo $this->headLink()."\n";
+echo "<!-- /LINK -->\n\n<!-- SCRIPT -->\n";
+echo $this->headScript()."\n";
+echo "<!-- /SCRIPT -->\n";
+?>
+</head>
+<?php
+echo $this->partial('partial/partial1', array('lang' => $this->myviewhelper()->vars['lang']));
+echo $this->content."\n";
+echo $this->partial('partial/partial2', array('lang' => $this->myviewhelper()->vars['lang']) );
+echo "\n<!-- SCRIPT -->\n";
+echo $this->inlineScript();
+echo "<!-- /SCRIPT -->\n";
+?>
+</body>
+</html>

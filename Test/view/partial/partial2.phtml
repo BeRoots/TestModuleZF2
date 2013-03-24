@@ -1,0 +1,26 @@
+<!-- /CONTENT -->
+                <div id="go_top">
+                    <a href="#top" class="JS_bubble_notitle" title="haut de page">&nbsp;</a>
+                </div>
+            </div>
+            <br clear="all" />
+            <br clear="all" />
+            <div class="socialsnetworks">
+                    <iframe src="//www.facebook.com/plugins/like.php?locale=fr_FR&amp;href=http%3A%2F%2Fwww.exemple.loc%2Fmapage&amp;send=false&amp;layout=button_count&amp;width=350&amp;show_faces=true&amp;action=like&amp;colorscheme=dark&amp;font&amp;height=21" scrolling="no" frameborder="0" style="border:0; padding:0; margin:0 15px 0 0; float:left; overflow:hidden; width:100px; height:21px;" allowTransparency="true"></iframe>
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-via="airreport" data-lang="<?php echo $this->myviewhelper()->vars['lang']; ?>">Tweeter</a>
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                    <!-- Place this tag where you want the +1 button to render. -->
+                    <div class="g-plusone" data-size="medium"></div>
+            </div>
+            <div id="contenu_bottom"></div>
+        </div>
+        <div id="container_bottom"></div>
+        <div id="footer">
+            <p>::  Site <?php echo $_SERVER['HTTP_HOST'].' '.$this->myviewhelper()->templateVars['layout']['installYear'].'-'.date('Y'); ?>  ::  © Copyright Deschamps Sébastien  ::<br />::  <a href="<?php //echo $this->url('application', array('lang' => $this->myviewhelper()->vars['lang'], 'module' => 'index', 'controller' => 'index', 'action' => 'mentionslegales')); ?>" title="Mentions légales">Tous droits réservés</a>   „“„ <a href="<?php echo 'http://'.$this->myviewhelper()->webmasterVars['domaine']; ?>" title="Site créé par Mr Deschamps Sébastien alias BeRoots"><img src="<?php echo 'http://'.$this->myviewhelper()->webmasterVars['domaine'].'/media/bannieres/banniere_'.$this->myviewhelper()->webmasterVars['suffix'].'_80x15.gif'; ?>" id="banniere_beroots_80x15" alt="<?php echo $this->myviewhelper()->webmasterVars['domaine'];?>" /></a> „“„   <a href="<?php //echo $this->url('application', array('lang' => $this->myviewhelper()->vars['lang'], 'module' => 'tools', 'controller' => 'mailto', 'action' => 'send?cible=webmaster')); ?>" title="Contacter le webmaster">Contacter le Webmaster</a>  ::</p>
+        </div>
+    </div>
+<?php // echo $this->render('focuserr.phtml'); ?>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+  {lang: '<?php echo $this->myviewhelper()->vars['lang']; ?>'}
+</script>

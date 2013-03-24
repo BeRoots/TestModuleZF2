@@ -1,0 +1,85 @@
+            <br clear="all" />
+            <div class="msg_top"></div>
+            <div class="msg_middle">
+                <p id="sous_titre">Contacter nous</p>
+                <?php echo $this->messages(array('valid', 'error')).PHP_EOL; ?>
+                <?php
+                    $form = $this->form;
+                    $form->prepare();
+                    $form->setAttribute('action', $this->url('mailto', array('action' => 'client')));
+                    $form->setAttribute('method', 'post');
+                    echo $this->form()->openTag($form).PHP_EOL;
+                ?>
+                    <div><div class="legend">Informations personnelles</div><div class="legend_fin">&nbsp;</div></div>
+                    <div class="fieldset_top"></div>
+                    <fieldset>
+                        <?php echo $this->formLabel($form->get('webIdentity')->get('name')); ?><span class="info" title="Protection contre le spam assurer">&nbsp;</span>
+                        <?php echo $this->formElement($form->get('webIdentity')->get('name')).PHP_EOL; ?>
+                        <?php echo $this->formElementErrors($form->get('webIdentity')->get('name')).PHP_EOL; ?>
+                        <?php echo $this->formLabel($form->get('webIdentity')->get('firstname')); ?><span class="info" title="Protection contre le spam assurer">&nbsp;</span>
+                        <?php echo $this->formElement($form->get('webIdentity')->get('firstname')).PHP_EOL; ?>
+                        <?php echo $this->formElementErrors($form->get('webIdentity')->get('firstname')).PHP_EOL; ?>
+                        <?php echo $this->formLabel($form->get('webIdentity')->get('email')); ?><span class="info" title="Protection contre le spam assurer">&nbsp;</span>
+                        <?php echo $this->formElement($form->get('webIdentity')->get('email')).PHP_EOL; ?>
+                        <?php echo $this->formElementErrors($form->get('webIdentity')->get('email')).PHP_EOL; ?>
+                    </fieldset>
+                    <div class="fieldset_bottom"></div>
+                    <div><div class="legend">Contenu du message</div><div class="legend_fin">&nbsp;</div></div>
+                    <div class="fieldset_top"></div>
+                    <fieldset>
+                        <div><?php echo $this->formLabel($form->get('simpleMessage')->get('subject')); ?><span class="info2" title="Sujet de votre message">&nbsp;</span></div>
+                        <?php echo $this->formElement($form->get('simpleMessage')->get('subject')).PHP_EOL; ?>
+                        <?php echo $this->formElementErrors($form->get('simpleMessage')->get('subject')).PHP_EOL; ?>
+                        <div><?php echo $this->formLabel($form->get('simpleMessage')->get('message')); ?><span class="info2" title="Contenu de votre message">&nbsp;</span></div>
+                        <?php echo $this->formElement($form->get('simpleMessage')->get('message')).PHP_EOL; ?>
+                        <?php echo $this->formElementErrors($form->get('simpleMessage')->get('message')).PHP_EOL; ?>
+                        <br clear="all" />
+                        <?php echo $this->formLabel($form->get('simpleMessage')->get('copy')).PHP_EOL; ?>
+                        <?php echo $this->formElement($form->get('simpleMessage')->get('copy')).PHP_EOL; ?>
+                        <?php echo $this->formElementErrors($form->get('simpleMessage')->get('copy')).PHP_EOL; ?>
+                        <div class="bouton_form">
+                            <?php echo $this->formRow($form->get('submit')).PHP_EOL; ?>
+                        </div>
+                    </fieldset>
+                    <div class="fieldset_bottom"></div>
+                <?php echo $this->form()->closeTag().PHP_EOL; ?>
+
+
+                    
+<!--        <form action="/mailto.php" method="post">
+            <div><div class="legend">Informations destinataire</div><div class="legend_fin">&nbsp;</div></div>
+            <div class="fieldset_top"></div>
+            <fieldset>
+                  <label class="court" for="label_destinataire">Choisir le(s) destinataire(s) :</label><span class="info" title="Choix du/des destinataire(s)">&nbsp;</span>
+                  <select id="label_destinataire" name="choix_destinataire" class="court" tabindex="1" size="1" />
+                     <option selected="selected">-------&gt; Le propri&eacute;taire du site</option>
+                     <option>-------&gt; Le webmaster</option>
+                  </select>
+            </fieldset>
+            <div class="fieldset_bottom"></div>
+            <div><div class="legend">Informations personnelles</div><div class="legend_fin">&nbsp;</div></div>
+            <div class="fieldset_top"></div>
+            <fieldset>
+               <label class="court" for="label_email">Votre adresse &eacute;lectronique :</label><span class="info" title="Protection contre le spam assurer">&nbsp;</span>
+               <input type="text" id="label_email" class="court" name="email" maxlength="100" tabindex="3" value="" />
+            </fieldset>
+            <div class="fieldset_bottom"></div>
+            <div><div class="legend">Contenu du message</div><div class="legend_fin">&nbsp;</div></div>
+            <div class="fieldset_top"></div>
+            <fieldset>
+               <div><label class="long" for="label_sujet">Sujet :</label><span class="info2" title="Sujet de votre message">&nbsp;</span></div>
+               <input type="text" id="label_sujet" class="long" name="sujet" maxlength="70" tabindex="4" value="" />
+               <div><label class="long" for="label_message">Message :</label><span class="info2" title="Contenu de votre message">&nbsp;</span></div>
+               <br clear="all" />
+               <textarea id="label_message" name="message" class="mceEditor" tabindex ="5"></textarea>
+               <label class="checkbox" for="label_copy_email">Pour re&ccedil;evoir une copie de ce message par email, cocher cette case :</label>
+               <input type="checkbox" name="copy_email" id="label_copy_email" class="checkbox" tabindex="1" value="send_copy" />
+               <div class="bouton_form">
+                  <input type="submit" class="bouton_form" name="envoi" tabindex="6" value="Envoyer" title="Valider la saisie des informations fournies" />
+               </div>
+            </fieldset>
+            <div class="fieldset_bottom"></div>
+            </form>
+-->
+            </div>
+            <div class="msg_bottom"></div>            
