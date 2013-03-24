@@ -11,6 +11,8 @@ class Contact extends Form
     {
         parent::__construct('mailto-form');
         $this->setHydrator(new ClassMethods());
+        $this->setAttribute('method', 'post');
+        $this->setAttribute('enctype', 'multipart/form-data');
         $this->add(array(
             'type' => 'Test\Form\Fieldset\WebIdentityFieldset',
             'name' => 'webIdentity',            
