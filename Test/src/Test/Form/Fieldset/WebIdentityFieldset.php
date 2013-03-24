@@ -44,7 +44,7 @@ class WebIdentityFieldset extends Fieldset
                     'id' => 'label_firstname',
                     'class' => 'court',
                     'tabindex' => 2,
-                    'maxlength' => 30
+                    'maxlength' => 50
                 )
             )
         ));
