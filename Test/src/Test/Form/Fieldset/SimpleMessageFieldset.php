@@ -49,15 +49,15 @@ class SimpleMessageFieldset extends Fieldset
         ));
         $this->add(array(
             'type' => 'Zend\Form\Element\Checkbox',
-            'name' => 'copy_email',
+            'name' => 'copy',
             'options' => array(
                 'label' => 'Recevoir une copie de ce message par email :',
                 'labelAttributes' => array(
                     'class' => 'checkbox',
-                    'for' => 'label_copy_email'
+                    'for' => 'label_copy'
                 ),
                 'attributes' => array(
-                    'id' => 'label_copy_email',
+                    'id' => 'label_copy',
                     'class' => 'checkbox',
                     'tabindex' => 6
                 )
